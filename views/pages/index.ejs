@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>API Basejump: URL Shortener microservice</h1>
+    <blockquote>
+        User stories:
+        <ol>
+            <li>I can pass a URL as a parameter and I will receive a shortened URL in the JSON response.</li>
+            <li>If I pass an invalid URL that doesn't follow the valid http://www.example.com format, the JSON response will contain an error instead.</li>
+            <li>When I visit that shortened URL, it will redirect me to my original link.</li>
+        </ol>
+    </blockquote>
+    <h2>Example usage:</h2>
+    <a href="url/http://google.com">https://fcc-url-shortener-zklinger.herokuapp.com/url/http://google.com</a><br/>
+    <h2>Example output:</h2>
+    <pre>{
+  "original_url": "http://google.com",
+  "short_url": "https://fcc-url-shortener-zklinger.herokuapp.com/25"
+}</pre>
+</div>
+
+</body>
+</html>
