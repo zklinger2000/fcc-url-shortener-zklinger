@@ -10,8 +10,10 @@
     "start": "node index.js"
   },
   "dependencies": {
+    "body-parser": "^1.15.2",
     "ejs": "2.4.1",
     "express": "4.13.3",
+    "mongoose": "^4.6.4",
     "morgan": "^1.7.0",
     "request": "^2.75.0",
     "ua-parser-js": "^0.7.10"

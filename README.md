@@ -17,7 +17,8 @@ Like:
 ```
 {
   "original_url": "http://google.com",
-  "short_url": "https://fcc-url-shortener-zklinger.herokuapp.com/25"
+  "short_url": "https://fcc-url-shortener-zklinger.herokuapp.com/25",
+  "request_count": 2
 }
 ```
 ### Results:

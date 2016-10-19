@@ -1,4 +1,5 @@
 const request = require('request');
+const ShortURL = require('../models/ShortURL');
 
 exports.urlShortener = function(req, res) {
   function checkFormat(params) {
@@ -21,14 +22,38 @@ exports.urlShortener = function(req, res) {
         });
       } else if (res.statusCode >= 200 && res.statusCode < 400) {
         // TODO: Attach mongoLab db
-        // If the url already exists in the db
-        // Then, return the url of the existing API endpoint
         // Else
         // Create a new short_url
         // Return the url of the new API endpoint
-        return res.json({
-          original_url: original_url,
-          short_url: 'https://fcc-url-shortener-zklinger.herokuapp.com/25'
+        // See if a shortURL with the given url exists
+        ShortURL.findOne({ 'url': original_url }, function(err, shortURL) {
+          if (err) return res.status(500).send({ error: err });
+          // If a shortURL DOES exist update requestCount
+          // Then, return the url of the existing API endpoint
+          if (shortURL) {
+            shortURL.requestCount = shortURL.requestCount + 1;
+            shortURL.save();
+            return res.json({
+              original_url: original_url,
+              short_url: 'http://localhost:5000/' + shortURL.slug,
+              request_count: shortURL.requestCount
+            });
+          } else {
+            ShortURL.find({}).sort('-slug').limit(1).exec(function(err, urls) {
+               // Create new shortURL and return token
+              const newShortURL = new ShortURL({
+                url: original_url,
+                slug: urls[0].slug + 1
+              });
+              newShortURL.save();
+              // res.send(newShortURL);
+              return res.json({
+                original_url: original_url,
+                short_url: 'http://localhost:5000/' + newShortURL.slug,
+                request_count: newShortURL.requestCount
+              });
+            });
+          }
         });
       }
     });
