@@ -17,11 +17,10 @@ app.get('/', function(req, res) {
 
 app.get('/url/*', function(req, res) {
   function checkFormat(params) {
-    const original_url = params[0];
-
-    if (typeof original_url === 'string') {
-      if (original_url.slice(0, 7) === 'http://' || original_url.slice(0, 8) === 'https://') {
-        return original_url;
+    const url = params[0];
+    if (typeof url === 'string' && !Number(url[7]) && !Number(url[8])) {
+      if (url.slice(0, 7) === 'http://' || url.slice(0, 8) === 'https://') {
+        return url;
       }
     }
     return null;
@@ -50,7 +49,7 @@ app.get('/url/*', function(req, res) {
     });
   } else {
     res.status(400).json({
-      error: 'missing http:// or https://'
+      error: 'malformed url'
     });
   }
 });
