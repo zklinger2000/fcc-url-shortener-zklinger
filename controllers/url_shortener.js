@@ -40,10 +40,11 @@ exports.urlShortener = function(req, res) {
             });
           } else {
             ShortURL.find({}).sort('-slug').limit(1).exec(function(err, urls) {
-               // Create new shortURL and return token
+              if (err) return res.status(500).send({ error: err });
+              // Create new shortURL and return token
               const newShortURL = new ShortURL({
                 url: original_url,
-                slug: urls[0].slug + 1
+                slug: urls.length ? urls[0].slug + 1 : 0
               });
               newShortURL.save();
               // res.send(newShortURL);
