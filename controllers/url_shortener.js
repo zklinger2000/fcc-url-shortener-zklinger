@@ -35,7 +35,7 @@ exports.urlShortener = function(req, res) {
             shortURL.save();
             return res.json({
               original_url: original_url,
-              short_url: 'http://localhost:5000/' + shortURL.slug,
+              short_url: 'https://fcc-url-shortener-zklinger.herokuapp.com/' + shortURL.slug,
               request_count: shortURL.requestCount
             });
           } else {
@@ -49,7 +49,7 @@ exports.urlShortener = function(req, res) {
               // res.send(newShortURL);
               return res.json({
                 original_url: original_url,
-                short_url: 'http://localhost:5000/' + newShortURL.slug,
+                short_url: 'https://fcc-url-shortener-zklinger.herokuapp.com/' + newShortURL.slug,
                 request_count: newShortURL.requestCount
               });
             });
