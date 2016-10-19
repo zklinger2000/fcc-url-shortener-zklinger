@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/fcc-url-shortener');
+mongoose.connect('mongodb://heroku_tvn52127:spjlatsbs95sfi17uif8m7lp0k@ds061506.mlab.com:61506/heroku_tvn52127');
 
 app.use(morgan('combined')); // Middleware for logging
 app.use(express.static(__dirname + '/public'));
